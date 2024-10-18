@@ -19,11 +19,10 @@
   "author": "jrmedd",
   "license": "ISC",
   "files": [
-    "dvsa",
-    "components",
-    "lib",
+    "layouts",
     "scss",
     "scripts",
+    "index.js",
     "govuk-prototype-kit.config.json"
   ],
   "publishConfig": {
