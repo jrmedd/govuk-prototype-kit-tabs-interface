@@ -1,0 +1,41 @@
+{
+  "name": "govuk-prototype-kit-tabs-interface",
+  "version": "1.0.0",
+  "description": "Simplifies use of the tabs interface we created for the DVSA's 'Manage your vehicle testing' service.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrmedd/govuk-prototype-kit-tabs-interface.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jrmedd/govuk-prototype-kit-tabs-interface/issues"
+  },
+  "homepage": "https://github.com/jrmedd/govuk-prototype-kit-tabs-interface#readme",
+  "keywords": [
+    "prototyping",
+    "government",
+    "govuk-prototype-kit"
+  ],
+  "main": "index.js",
+  "author": "jrmedd",
+  "license": "ISC",
+  "files": [
+    "dvsa",
+    "components",
+    "lib",
+    "scss",
+    "scripts",
+    "govuk-prototype-kit.config.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "govuk-prototype-kit": "^13.16.2"
+  },
+  "devDependencies": {
+    "govuk-prototype-kit": "^13.16.2"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/postInstall.js"
+  }
+}

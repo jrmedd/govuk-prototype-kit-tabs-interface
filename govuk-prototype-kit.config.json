@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "description": "Simplifies use of the tabs interface we created for the DVSA's 'Manage your vehicle testing' service.",
+    "urls": {
+      "documentation": "https://github.com/jrmedd/dvsa-tabs",
+      "releaseNotes": "https://github.com/jrmedd/dvsa-tabs",
+      "versionHistory": "https://npmjs.com/package/dvsa-tabs?activeTab=versions"
+    }
+  },
+  "pluginDependencies": [
+    {
+      "packageName": "govuk-frontend",
+      "minVersion": "5.6.0"
+    }
+  ],
+  "nunjucksPaths": [
+    "/"
+  ],
+  "importNunjucksMacrosInto": [
+    "/layouts/tabs-layout.njk"
+  ],
+  "sass": [
+    "/scss/styles.scss"
+  ],
+  "scripts": [
+    "/scripts/javascript.js"
+  ]
+}

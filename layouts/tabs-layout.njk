@@ -1,0 +1,62 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+{% block main %}
+  <div>
+    <main  id="main-content" role="main">
+      <div class="app-masthead">
+        <div class="govuk-width-container app-width-container">
+          <nav aria-label="breadcrumb" class="govuk-breadcrumbs">
+            <ol class="govuk-breadcrumbs__list">
+              <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="/">Home</a>
+              </li>
+              <li class="govuk-breadcrumbs__list-item">
+                {{ section.name }}
+              </li>
+              <li id="current-page-crumb" aria-current="location" class="govuk-breadcrumbs__list-item">
+                {{ section.activeTab.name }}
+              </li>
+            </ol>
+          </nav>
+          <div class="masthead-heading">
+            <h1 class="govuk-heading-xl">
+              {{ section.name }}
+            </h1>
+            <p class="govuk-body">{{ section.description }}</p>
+          </div>
+          <ul role="tablist" class="tabs">
+          {% for tab in section.tabs %}
+            {% set activeTab = section.activeTab.path == tab.path %}
+            <li role="presentation" class="tab-item">
+              <a 
+                role="tab" 
+                id="{{tab.path}}" 
+                class="govuk-body-l tab-link {% if activeTab %}active-tab{% endif %}" 
+                aria-selected="{% if activeTab %}true{% else %}false{% endif %}"
+                {% if not activeTab %}tabindex="-1"{% endif %}
+                data-tab="/{{ section.path }}/{{ tab.path}}"
+                data-tab-name='{{ tab.name }}'
+                data-section='{{ section.name }}'
+                data-service-name='{{ serviceName }}'
+                href="/{{ section.path }}/{{ tab.path }}">{{ tab.name }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="govuk-width-container">
+        {% block content %}
+        {% for tab in section.tabs %}
+          {% set activeTab = section.requestPath == tab.path %}
+          <section 
+            role="tabpanel"
+            class="govuk-main-wrapper app-main-class tab-content {% if activeTab %}active-tab{% endif %}"
+            data-tab="/{{ section.path }}/{{ tab.path}}"
+            aria-labelledby="{{tab.path }}">
+            {% include tab.content %}
+          </section>
+        {% endfor %}
+        {% endblock %}
+      </div>
+    </main>
+  </div>
+{% endblock %}
