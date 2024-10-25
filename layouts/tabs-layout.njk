@@ -33,11 +33,11 @@
                 class="govuk-body-l tab-link {% if activeTab %}active-tab{% endif %}" 
                 aria-selected="{% if activeTab %}true{% else %}false{% endif %}"
                 {% if not activeTab %}tabindex="-1"{% endif %}
-                data-tab="/{{ section.path }}/{{ tab.path}}"
+                data-tab="{{ tab.completePath }}{% if tab.renderingDeepContent %}/{{ tab.deepContentPath }}{% endif %}"
                 data-tab-name='{{ tab.name }}'
                 data-section='{{ section.name }}'
                 data-service-name='{{ serviceName }}'
-                href="/{{ section.path }}/{{ tab.path }}">{{ tab.name }}</a>
+                href="{{ tab.completePath }}{% if tab.renderingDeepContent %}/{{ tab.deepContentPath }}{% endif %}">{{ tab.name }}</a>
             </li>
             {% endfor %}
           </ul>
@@ -50,9 +50,13 @@
           <section 
             role="tabpanel"
             class="govuk-main-wrapper app-main-class tab-content {% if activeTab %}active-tab{% endif %}"
-            data-tab="/{{ section.path }}/{{ tab.path}}"
-            aria-labelledby="{{tab.path }}">
-            {% include tab.content %}
+            data-tab="{{ tab.completePath }}{% if tab.renderingDeepContent %}/{{ tab.deepContentPath }}{% endif %}"
+            aria-labelledby="{{ tab.path }}">
+            {% if tab.renderingDeepContent %}
+              {% include tab.renderingDeepContent %}
+            {% else %}
+              {% include tab.content %}
+            {% endif %}
           </section>
         {% endfor %}
         {% endblock %}

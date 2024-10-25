@@ -29,7 +29,13 @@ module.exports = {
         },
         {
           name: "Search past transactions",
-          content: 'past-transactions'
+          content: 'past-transactions',
+          deepContent: [
+            {
+              name: 'Search results',
+              content: 'transactions-table'
+            }
+          ]
         }
       ]
     },
@@ -59,6 +65,7 @@ module.exports = {
 
 * Sections: Each section corresponds to a tile on the homepage.
 * Tabs: Within each section, tabs define the subpages under the section.
+* Deep content: Within each tab, deep content defines pages that go beyond the first page of the tab content
 
 You can specify the content of each tab in the `app/views` folder using standard HTML or Nunjucks templates. The system automatically handles the routing and rendering for you.
 
@@ -66,6 +73,7 @@ In the above structure:
 * The section “Facility management” includes two tabs:
   * “Today’s completed tests” (content from `views/todays-tests`)
   * “Search past transactions” (content from `views/past-transactions`)
+    * Within this tab, there is _deep content_: “Search results” (content from `views/transactions-table`) 
 * The section “Apply for a vehicle test” has three tabs:
   * “Apply” (content from `views/apply.njk`)
   * “Current applications” (content from `views/current.njk`)
@@ -78,6 +86,8 @@ When you create sections and tabs, routes are automatically generated. The route
 
 For example, the route for “Today’s completed tests” under the “Facility management” section will be: `/facility-management/todays-completed-tests`
 
+For deep content, the route for “Search results” within the “Search past transactions” tab of the “Facility management” section will be `/facility-management/search-past-transactions/search-results`
+
 ## How To Use
 
 1.	Define the tabbed interface structure in the data/session-data-defaults.js file.
@@ -87,5 +97,4 @@ For example, the route for “Today’s completed tests” under the “Facility
 ## To-do / outstanding
 
 * Homepage tiles
-* Journeys within tabs i.e. a third URL segment e.g. `section/tab/step-one`
 * Some error handling for when content pages don't exist
