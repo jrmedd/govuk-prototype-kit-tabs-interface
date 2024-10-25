@@ -15,16 +15,17 @@ String.prototype.parts = function() {
 const pathPattern = /^((?!\.(css|js|png|jpg|jpeg|json|gif|svg|ico|woff|woff2|ttf|eot)).)*$/
 
 function useStructure(req, res, next) {
-  const leftmost = req.path.parts()[0]
-  const section = req.session.data.sections.find(section => section.name.url() === leftmost)
+  const urlParts = req.path.parts()
+  const section = req.session.data.sections.find(section => section.name.url() === urlParts[0])
   if (section) {
-    section.path = leftmost
-    section.requestPath = req.path.parts().at(1)
-    section.tabs = section.tabs.map(tab => ({ ...tab, path: tab.name.url()}))
+    section.path = urlParts[0]
+    section.requestPath = urlParts.at(1)
+    section.tabs = section.tabs.map(tab => ({ ...tab, path: tab.name.url(), completePath: `/${section.name.url()}/${tab.name.url()}`, deepContentPath: urlParts.at(2) ?? ''}))
     section.activeTab = section.tabs.find(tab => tab.path === section.requestPath)
-    return res.render('layouts/tabs-layout.njk', {section})
+    section.activeTab.renderingDeepContent = urlParts.at(2) ? section.activeTab.deepContent.find(content => urlParts.at(2) === content.name.url()).content : false
+    return res.render('layouts/tabs-layout.njk', {section, request: req})
   } else {
-    res.render(req.path)
+    res.render(req.path, {request: req})
   }
 }
 
