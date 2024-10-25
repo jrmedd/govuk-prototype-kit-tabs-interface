@@ -52,7 +52,7 @@ module.exports = {
           content: "current"
         },
         {
-          name: "Past applications"
+          name: "Past applications",
           content: "past"
         }
       ]
