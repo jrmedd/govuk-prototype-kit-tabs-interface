@@ -16,7 +16,7 @@ const pathPattern = /^((?!\.(css|js|png|jpg|jpeg|json|gif|svg|ico|woff|woff2|ttf
 
 function useStructure(req, res, next) {
   const urlParts = req.path.parts()
-  const section = req.session.data.sections.find(section => section.name.url() === urlParts[0])
+  const section = req.session.data.sections ? req.session.data.sections.find(section => section.name.url() === urlParts[0]) : undefined
   if (section) {
     section.path = urlParts[0]
     section.requestPath = urlParts.at(1)

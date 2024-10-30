@@ -1,6 +1,6 @@
 {
   "name": "govuk-prototype-kit-tabs-interface",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Simplifies use of the tabs interface we created for the DVSA's 'Manage your vehicle testing' service.",
   "repository": {
     "type": "git",
